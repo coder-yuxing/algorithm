@@ -1,7 +1,5 @@
 package com.yuxing.algorithm;
 
-import cn.hutool.json.JSONUtil;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,10 +30,9 @@ public class TwoSum {
     public static void main(String[] args) {
         int[] nums = {2, 7, 11, 15};
         int[] result = towSum(nums, 9);
-        System.err.println(JSONUtil.toJsonStr(result));
 
         int[] nums1 = {3, 3};
-        System.err.println(JSONUtil.toJsonStr(towSum(nums1, 6)));
+        System.err.println(towSum(nums1, 6));
 
     }
 
