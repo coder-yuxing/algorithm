@@ -18,6 +18,8 @@ public class SearchMatrix {
     }
 
     public static boolean searchMatrix(int[][] matrix, int target) {
+        // 更好的算法是：先在第一列确认其所在行
+        // 然后再在所在行确认其具体所在位置
         boolean hasTarget = false;
         for (int i = 0; i < matrix.length; i++) {
             if (binarySearch(matrix[i], target) != -1) {
