@@ -8,29 +8,32 @@ package com.yuxing.algorithm.base;
  */
 public class BinarySearch {
 
-    /**
-     * 寻找左侧边界
-     *
-     * @param nums
-     * @param target
-     * @return
-     */
+    public static void main(String[] args) {
+        int[] nums = {1, 2, 3, 4, 5, 6, 7};
+        int i = binarySearch(nums, 2);
+        System.err.println(i);
+    }
+
     public static int binarySearch(int[] nums, int target) {
-        int low = 0, high = nums.length;
-        // [low, high) 左开右闭区间
-        while (low < high) {
-            int mid = (low + high) / 2;
-            // 查到目标值后继续向左侧寻找
+        int n = nums.length;
+        if (n == 0) {
+            return -1;
+        }
+
+        int left = 0, right = n - 1;
+        // 左右边界相等时退出循环
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
             if (nums[mid] == target) {
-                high = mid;
+                return mid;
             }
             else if (nums[mid] > target) {
-                high = mid;
+                right = mid - 1;
             }
             else if (nums[mid] < target) {
-                low = mid + 1;
+                left = mid + 1;
             }
         }
-        return low;
+        return -1;
     }
 }
