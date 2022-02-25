@@ -1,7 +1,6 @@
 package com.yuxing.algorithm;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 无重复字符的最长子串
@@ -29,8 +28,34 @@ import java.util.Map;
 public class LengthOfLongestSubstring {
 
     public static void main(String[] args) {
-        String s = "pwwkew";
+        String s = "bbbbb";
         System.err.println(lengthOfLongestSubstring(s));
+        System.err.println(slidingWindowSolveLengthOfLongestSubstring(s));
+    }
+
+    /**
+     * 滑动窗口解决方案
+     * 设置左右指针，标识窗口左右边界，初始值皆为0
+     * 1.右指针向前滑动，不断扩充窗口边界，并在向前滑动时记录所滑过的字符
+     * 2.当右指针向前滑动遇到重复字符时，停止滑动，开始滑动左侧指针，缩小窗口边界，直到不再存在重复字符
+     * 3.比较当前不重复子串(窗口左右边界的差值)与上次记录的大小，保留最大值
+     */
+    public static int slidingWindowSolveLengthOfLongestSubstring(String s) {
+        int left = 0, right = 0, max = 0;
+        Map<Character, Integer> window = new HashMap<>();
+        while (right < s.length()) {
+            char c = s.charAt(right);
+            Integer num = Optional.ofNullable(window.get(c)).orElse(0);
+            window.put(c, ++num);
+            right++;
+            while (window.get(c) > 1) {
+                Integer num1 = window.get(s.charAt(left));
+                window.put(s.charAt(left), --num1);
+                left++;
+            }
+            max = Math.max(max, right - left);
+        }
+        return max;
     }
 
     public static int lengthOfLongestSubstring(String s) {
