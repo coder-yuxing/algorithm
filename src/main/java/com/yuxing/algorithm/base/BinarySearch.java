@@ -15,11 +15,41 @@ public class BinarySearch {
 
         nums = new int[]{1, 2, 2, 2, 2, 3, 4, 5};
         System.err.println(leftBoundaryByBinarySearch(nums, 2) == 1);
+        System.err.println(rightBoundaryByBinarySearch(nums, 2) == 4);
 
         nums = new int[]{1, 2, 3, 4, 4, 4, 5, 6};
         System.err.println(leftBoundaryByBinarySearch(nums, 4) == 3);
+        System.err.println(rightBoundaryByBinarySearch(nums, 4) == 5);
     }
 
+    /**
+     * 二分查找获取右侧边界
+     */
+    public static int rightBoundaryByBinarySearch(int[] nums, int target) {
+        int n = nums.length;
+        if (n == 0) {
+            return -1;
+        }
+
+        int left = 0, right = n - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target) {
+                left = mid + 1;
+            }
+            else if (nums[mid] > target) {
+                right = mid - 1;
+            }
+            else if (nums[mid] < target) {
+                left = mid + 1;
+            }
+        }
+
+        if (right >= n || nums[right] != target) {
+            return -1;
+        }
+        return right;
+    }
 
 
     /**
